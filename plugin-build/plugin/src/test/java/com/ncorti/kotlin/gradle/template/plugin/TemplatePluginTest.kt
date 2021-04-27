@@ -1,4 +1,4 @@
-package com.ncorti.kotlin.gradle.template.plugin
+package org.jetbrains.dokka.download
 
 import org.gradle.testfixtures.ProjectBuilder
 import org.junit.Assert.assertEquals
@@ -11,7 +11,7 @@ class TemplatePluginTest {
     @Test
     fun `plugin is applied correctly to the project`() {
         val project = ProjectBuilder.builder().build()
-        project.pluginManager.apply("com.ncorti.kotlin.gradle.template.plugin")
+        project.pluginManager.apply("org.jetbrains.dokka.download")
 
         assert(project.tasks.getByName("templateExample") is TemplateExampleTask)
     }
@@ -19,7 +19,7 @@ class TemplatePluginTest {
     @Test
     fun `extension templateExampleConfig is created correctly`() {
         val project = ProjectBuilder.builder().build()
-        project.pluginManager.apply("com.ncorti.kotlin.gradle.template.plugin")
+        project.pluginManager.apply("org.jetbrains.dokka.download")
 
         assertNotNull(project.extensions.getByName("templateExampleConfig"))
     }
@@ -27,7 +27,7 @@ class TemplatePluginTest {
     @Test
     fun `parameters are passed correctly from extension to task`() {
         val project = ProjectBuilder.builder().build()
-        project.pluginManager.apply("com.ncorti.kotlin.gradle.template.plugin")
+        project.pluginManager.apply("org.jetbrains.dokka.download")
         val aFile = File(project.projectDir, ".tmp")
         (project.extensions.getByName("templateExampleConfig") as TemplateExtension).apply {
             tag.set("a-sample-tag")

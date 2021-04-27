@@ -1,8 +1,11 @@
-package com.ncorti.kotlin.gradle.template.plugin
+package org.jetbrains.dokka.download
 
 import org.gradle.api.Project
+import org.gradle.api.artifacts.repositories.ArtifactRepository
 import org.gradle.api.file.RegularFileProperty
+import org.gradle.api.provider.ListProperty
 import org.gradle.api.provider.Property
+import org.gradle.api.provider.SetProperty
 import javax.inject.Inject
 
 const val DEFAULT_OUTPUT_FILE = "template-example.txt"
@@ -12,11 +15,9 @@ abstract class TemplateExtension @Inject constructor(project: Project) {
 
     private val objects = project.objects
 
-    val message: Property<String> = objects.property(String::class.java)
+    val allowedRepositories: ListProperty<String> = objects.listProperty(String::class.java)
 
-    val tag: Property<String> = objects.property(String::class.java)
-
-    val outputFile: RegularFileProperty = objects.fileProperty().convention(
+    val outputDir: RegularFileProperty = objects.fileProperty().convention(
         project.layout.buildDirectory.file(DEFAULT_OUTPUT_FILE)
     )
 }
